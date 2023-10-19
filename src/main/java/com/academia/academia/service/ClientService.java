@@ -6,6 +6,7 @@ import com.academia.academia.models.DTOS.ClieneAlterarPlano;
 import com.academia.academia.models.DTOS.ClientDTO;
 import com.academia.academia.models.DTOS.PlanDTO;
 import com.academia.academia.models.PlanModel;
+import com.academia.academia.models.SituacaoCliente;
 import com.academia.academia.repositories.ClientRepository;
 import com.academia.academia.repositories.PlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,8 +79,5 @@ public class ClientService {
         repository.save(entity);
     }
 
-    public void matricularCliente(Integer idCliente, Integer idPlano){
-        var cliente = repository.findById(idCliente).orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado nenhum cliente com este ID!"));
-        var plano = planRepository.findById(idPlano).orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado nenhum plano com este ID!"));
-    }
+
 }

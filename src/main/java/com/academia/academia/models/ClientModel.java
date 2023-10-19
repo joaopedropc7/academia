@@ -31,6 +31,9 @@ public class ClientModel {
     private String numeroTelefone;
     @Column(name = "situacao_cliente_id")
     private SituacaoCliente situacaoCliente;
+    @ManyToOne
+    @JoinColumn(name = "matricula_id")
+    private MatriculaModel matriculaModel;
 
 
     public ClientModel() {
@@ -43,7 +46,7 @@ public class ClientModel {
         this.dataNascimento = dataNascimento;
         this.planModel = planModel;
         this.numeroTelefone = clientDTO.numeroTelefone();
-        this.situacaoCliente = SituacaoCliente.Regular;
+        this.situacaoCliente = SituacaoCliente.Desmatriculado;
     }
 
     public Integer getId() {
