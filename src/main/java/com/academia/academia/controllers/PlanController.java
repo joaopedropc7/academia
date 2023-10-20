@@ -42,7 +42,7 @@ public class PlanController {
 
     @GetMapping
     @Operation(summary = "Finds all plans", description = "Finds all plans",
-            tags = {"Plans"},
+            tags = {"Plan"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200",
                             content = {
@@ -103,7 +103,7 @@ public class PlanController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletes a Plan",
             description = "Deletes a Person by passing in a JSON, XML or YML representation of the Plan!",
-            tags = {"Plans"},
+            tags = {"Plan"},
             responses = {
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),

@@ -39,6 +39,7 @@ public class ClientService {
         Date dataNascimento = dateFormat.parse(clientDTO.dataDeNascimento());
 
         ClientModel cliente = new ClientModel(clientDTO, plano, dataNascimento);
+        System.out.println(cliente);
         repository.save(cliente);
         return cliente;
     }

@@ -13,7 +13,7 @@ public class MatriculaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "datamatricula")
+    @Column(name = "data_matricula")
     private LocalDate dataMatricula;
     @ManyToOne
     @JoinColumn(name = "idcliente")
@@ -23,12 +23,15 @@ public class MatriculaModel {
     private PlanModel plano;
     @Column(name = "valorpago")
     private Double valorPago;
+    @Column(name = "matriculaativa")
+    private Boolean matriculaAtiva;
 
     public MatriculaModel(ClientModel cliente, PlanModel plano) {
         this.dataMatricula = LocalDate.now();
         this.cliente = cliente;
         this.plano = plano;
         this.valorPago = plano.getValue();
+        this.matriculaAtiva = true;
     }
 
     public MatriculaModel() {
@@ -74,6 +77,14 @@ public class MatriculaModel {
 
     public void setValorPago(Double valorPago) {
         this.valorPago = valorPago;
+    }
+
+    public Boolean getMatriculaAtiva() {
+        return matriculaAtiva;
+    }
+
+    public void setMatriculaAtiva(Boolean matriculaAtiva) {
+        this.matriculaAtiva = matriculaAtiva;
     }
 
     @Override

@@ -16,9 +16,6 @@ public class PlanModel {
     private String name;
     private Double value;
     private String descricao;
-    @OneToMany
-    @JoinColumn(name = "cliente_id")
-    private List<ClientModel> clientes;
 
     public PlanModel() {
     }
@@ -61,24 +58,17 @@ public class PlanModel {
         this.descricao = descricao;
     }
 
-    public List<ClientModel> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<ClientModel> clientes) {
-        this.clientes = clientes;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlanModel planModel = (PlanModel) o;
-        return Objects.equals(id, planModel.id) && Objects.equals(name, planModel.name) && Objects.equals(value, planModel.value) && Objects.equals(descricao, planModel.descricao) && Objects.equals(clientes, planModel.clientes);
+        return Objects.equals(id, planModel.id) && Objects.equals(name, planModel.name) && Objects.equals(value, planModel.value) && Objects.equals(descricao, planModel.descricao);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, value, descricao, clientes);
+        return Objects.hash(id, name, value, descricao);
     }
 }

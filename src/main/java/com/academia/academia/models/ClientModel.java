@@ -122,6 +122,14 @@ public class ClientModel {
         this.situacaoCliente = situacaoCliente;
     }
 
+    public MatriculaModel getMatriculaModel() {
+        return matriculaModel;
+    }
+
+    public void setMatriculaModel(MatriculaModel matriculaModel) {
+        this.matriculaModel = matriculaModel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

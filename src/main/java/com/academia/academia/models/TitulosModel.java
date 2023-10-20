@@ -12,10 +12,12 @@ public class TitulosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "idcliente")
-    private Integer idCliente;
-    @Column(name = "idplano")
-    private Integer idPlano;
+    @ManyToOne
+    @JoinColumn(name = "idcliente")
+    private ClientModel client;
+    @ManyToOne
+    @JoinColumn(name = "idplano")
+    private PlanModel plan;
     @Column(name = "valorpago")
     private Double valorPago;
     @Column(name = "juros")
@@ -33,20 +35,20 @@ public class TitulosModel {
         this.id = id;
     }
 
-    public Integer getIdCliente() {
-        return idCliente;
+    public ClientModel getClient() {
+        return client;
     }
 
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
+    public void setClient(ClientModel client) {
+        this.client = client;
     }
 
-    public Integer getIdPlano() {
-        return idPlano;
+    public PlanModel getPlan() {
+        return plan;
     }
 
-    public void setIdPlano(Integer idPlano) {
-        this.idPlano = idPlano;
+    public void setPlan(PlanModel plan) {
+        this.plan = plan;
     }
 
     public Double getValorPago() {
@@ -86,11 +88,11 @@ public class TitulosModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TitulosModel that = (TitulosModel) o;
-        return Objects.equals(id, that.id) && Objects.equals(idCliente, that.idCliente) && Objects.equals(idPlano, that.idPlano) && Objects.equals(valorPago, that.valorPago) && Objects.equals(juros, that.juros) && Objects.equals(dataPagamento, that.dataPagamento) && Objects.equals(FormaDePagamento, that.FormaDePagamento);
+        return Objects.equals(id, that.id) && Objects.equals(client, that.client) && Objects.equals(plan, that.plan) && Objects.equals(valorPago, that.valorPago) && Objects.equals(juros, that.juros) && Objects.equals(dataPagamento, that.dataPagamento) && Objects.equals(FormaDePagamento, that.FormaDePagamento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idCliente, idPlano, valorPago, juros, dataPagamento, FormaDePagamento);
+        return Objects.hash(id, client, plan, valorPago, juros, dataPagamento, FormaDePagamento);
     }
 }

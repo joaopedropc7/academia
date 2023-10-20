@@ -5,5 +5,6 @@ create table matriculas(
     foreign key (idcliente) references clientes(id),
     idplano int not null,
     foreign key (idplano) references planos(id),
-    valorpago double not null
+    valorpago double not null,
+    matriculaativa boolean not null
 )
