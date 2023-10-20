@@ -41,6 +41,19 @@ public class MatriculaController {
         return matriculaModel;
     }
 
+    @PostMapping("/desmatricular")
+    @Operation(summary = "Desmatricular cliente",
+            description = "Desmatricula by passing in a JSON, XML or YML representation of the client!",
+            tags = {"Matricula"},
+            responses = {
+                    @ApiResponse(description = "Success", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = MatriculaModel.class))
+                    ),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+            }
+    )
     public void desmatricularCliente(Integer idCliente){
         matriculaService.desmtricularCliente(idCliente);
     }

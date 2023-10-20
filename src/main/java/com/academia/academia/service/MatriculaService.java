@@ -2,6 +2,7 @@ package com.academia.academia.service;
 
 import com.academia.academia.exceptions.ResourceNotFoundException;
 import com.academia.academia.models.ClientModel;
+import com.academia.academia.models.DTOS.PagamentoDTO;
 import com.academia.academia.models.DTOS.RealizarMatriculaDTO;
 import com.academia.academia.models.MatriculaModel;
 import com.academia.academia.models.SituacaoCliente;
@@ -25,6 +26,9 @@ public class MatriculaService {
     @Autowired
     private ClientRepository clientRepository;
 
+    @Autowired
+    private PagamentosService pagamentosService;
+
     public MatriculaModel matricularCliente(RealizarMatriculaDTO dto){
         var cliente = clientRepository.findById(dto.idCliente()).orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado nenhum cliente com este ID!"));
         var plano = planRepository.findById(dto.idPlano()).orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado nenhum plano com este ID!"));
@@ -38,6 +42,8 @@ public class MatriculaService {
         cliente.setPlanModel(plano);
         MatriculaModel matricula = new MatriculaModel(cliente, plano);
         cliente.setMatriculaModel(matricula);
+        PagamentoDTO pagamentoDTO = new PagamentoDTO(cliente.getId(), dto.formaDePagamento());
+        pagamentosService.realizarPagamento(pagamentoDTO);
         clientRepository.save(cliente);
         matriculaRepository.save(matricula);
         return matricula;
@@ -53,6 +59,7 @@ public class MatriculaService {
         clientRepository.save(cliente);
         MatriculaModel matricula = clientRepository.findMatriculaModelById(idCliente);
         matricula.setMatriculaAtiva(false);
+        matriculaRepository.save(matricula);
     }
 
     public List<MatriculaModel> listarMatriculas(){

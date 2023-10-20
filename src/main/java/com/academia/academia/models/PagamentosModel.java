@@ -2,12 +2,13 @@ package com.academia.academia.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "titulos")
-public class TitulosModel {
+public class PagamentosModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +24,25 @@ public class TitulosModel {
     @Column(name = "juros")
     private Double juros;
     @Column(name = "datapagamento")
-    private Date dataPagamento;
+    private LocalDate dataPagamento;
     @Column(name = "formadepagamento")
-    private String FormaDePagamento;
+    private String formaDePagamento;
+    @Column(name = "estornado")
+    private boolean estornado;
+
+
+    public PagamentosModel() {
+    }
+
+    public PagamentosModel(ClientModel client, PlanModel plan, Double valorPago, Double juros, String formaDePagamento) {
+        this.client = client;
+        this.plan = plan;
+        this.valorPago = valorPago;
+        this.juros = juros;
+        this.dataPagamento = LocalDate.now();
+        this.formaDePagamento = formaDePagamento;
+        this.estornado = false;
+    }
 
     public Integer getId() {
         return id;
@@ -67,32 +84,40 @@ public class TitulosModel {
         this.juros = juros;
     }
 
-    public Date getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(Date dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
     public String getFormaDePagamento() {
-        return FormaDePagamento;
+        return formaDePagamento;
     }
 
     public void setFormaDePagamento(String formaDePagamento) {
-        FormaDePagamento = formaDePagamento;
+        formaDePagamento = formaDePagamento;
+    }
+
+    public boolean isEstornado() {
+        return estornado;
+    }
+
+    public void setEstornado(boolean estornado) {
+        this.estornado = estornado;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TitulosModel that = (TitulosModel) o;
-        return Objects.equals(id, that.id) && Objects.equals(client, that.client) && Objects.equals(plan, that.plan) && Objects.equals(valorPago, that.valorPago) && Objects.equals(juros, that.juros) && Objects.equals(dataPagamento, that.dataPagamento) && Objects.equals(FormaDePagamento, that.FormaDePagamento);
+        PagamentosModel that = (PagamentosModel) o;
+        return Objects.equals(id, that.id) && Objects.equals(client, that.client) && Objects.equals(plan, that.plan) && Objects.equals(valorPago, that.valorPago) && Objects.equals(juros, that.juros) && Objects.equals(dataPagamento, that.dataPagamento) && Objects.equals(formaDePagamento, that.formaDePagamento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, plan, valorPago, juros, dataPagamento, FormaDePagamento);
+        return Objects.hash(id, client, plan, valorPago, juros, dataPagamento, formaDePagamento);
     }
 }

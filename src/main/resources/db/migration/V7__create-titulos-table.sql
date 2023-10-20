@@ -7,5 +7,6 @@ create table titulos(
     valorpago double not null,
     juros double not null,
     datapagamento date not null,
-    formadepagamento varchar(50) not null
+    formadepagamento varchar(50) not null,
+    estornado boolean not null
 )
